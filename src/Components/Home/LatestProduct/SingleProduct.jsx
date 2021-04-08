@@ -9,11 +9,16 @@ const Product_view = (props) => {
     
     //set Products on cart
    //  const [Cart_Products,setCart_Products] = useContext(Cart_Manage);
-   const [Cart_Products,setCart_Products] = useState([]);
+   const [cart,setCart] = useState([]);
    const Add_to_cart = (Get_CartProduct) => {
-      setCart_Products([...Cart_Products,Get_CartProduct]);
+
+      // console.log("single product",Get_CartProduct);
+      const NewCart = [...cart,Get_CartProduct];
+      setCart(NewCart);
+      // setCart([...cart,Get_CartProduct]);
+      // console.log(cart);
     }
-    console.log(Cart_Products);
+    console.log(cart);
     return(
         <>
           <div className="Product_container p-3 bg-white">
