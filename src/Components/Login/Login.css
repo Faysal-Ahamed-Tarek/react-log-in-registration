@@ -1,0 +1,49 @@
+.Login_body{
+    width: 550px;
+    background-color: white;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+.Login_section{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 110vh;
+}
+input,label{
+    box-shadow: none !important;
+    font-weight: 500;
+}
+
+p{
+    margin: 0px !important;
+}
+#customId{
+    background-color: #11193b !important;
+}
+.social_area{
+    width: 95% !important;
+    margin: auto !important;
+}
+button.social_btn {
+    outline: none;
+    border: none;
+    width: 100%;
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: capitalize;
+    padding: 5px 10px;
+    border-radius: 4px;
+    color: white !important;
+}
+
+button.google_signIn {
+    background: #DF4930;
+    color: white;
+}
+
+button.social_btn.fb_signin {
+    background: #507CC0;
+}
+button.social_btn.twitter_signIn {
+    background: #64CCF1;
+}

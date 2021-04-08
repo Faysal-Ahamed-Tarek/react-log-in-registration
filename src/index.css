@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400;500;600;700;800;900&display=swap');
+*{
+    padding: 0px;
+    margin: 0px;
+}
+body{
+    background-color: #f7f7f7 !important;
+    font-family: 'Maven Pro', sans-serif !important;
+}
+.Custom_button{
+    background-color: #11193b !important;
+    color: white !important;
+    font-size: 19px !important;
+    font-weight: 600 !important;
+    cursor: pointer;
+    padding:8px 0px !important;
+}
+a{
+    text-decoration: none !important;
+}
+li{
+    font-weight: 500;
+}
+
+a:hover{
+    transition: 0.5s !important;
+    color: #faa500 !important;
+}

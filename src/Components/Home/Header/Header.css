@@ -1,0 +1,48 @@
+
+.Main_Header{
+    border-bottom: 1px solid rgba(0,0,0,.125);
+}
+.Menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Menu a {
+    color: black;
+    font-weight: 500;
+    padding: 4px 12px;
+    margin: 0px 5px;
+    border-radius: 3px;
+    font-size:20px;
+}
+.SignIn_btn{
+    background-color: #11193b;
+    width: 50%;
+    float: right !important;
+    border-radius: 4px;
+}
+.SignIn_btn a {
+    display: block;
+    text-align: center;
+    padding: 4px 0px;
+    font-size: 18px;
+    color: white;
+    font-weight: 500;
+}
+.SignIn_btn a:hover{
+    color: white;
+}
+.active{
+    background-color:#f7f7f7 !important;
+}
+.Price_count {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight:500;
+    font-size:18px;
+}
+.Cart_amount{
+    color: #11193b;
+}
