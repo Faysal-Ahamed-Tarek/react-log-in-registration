@@ -5,7 +5,11 @@ import Product_listing from './ProductList';
 
 const Cart =() => {
     //add to cart state
-    const [Cart_Products,setCart_Products] = useState(localStorage.getItem("set_cart_product" || []));
+    const [Cart_Info,setCart_Info] = useState(() => {
+        const DefaultProduct = localStorage.getItem("set_cart_product");
+        return JSON.parse(DefaultProduct);
+    });
+    console.log(Cart_Info);
     //quantity
     const [Product_Quantity,setProduct_Quantity] = useState(0);
     //increment quantity
@@ -42,7 +46,7 @@ const Cart =() => {
                             </div>
                         </div>
                         {
-                          Cart_Products &&  Cart_Products.map( res => <Product_listing CartProducts={res} Decrement={Decrement} Increment={Increment} Product_Quantity={Product_Quantity}/> )
+                          Cart_Info &&  Cart_Info.map( res => <Product_listing CartProduct={res} Decrement={Decrement} Increment={Increment} Product_Quantity={Product_Quantity}/> )
                         }
                     </div>
                     <div className="col-3 pt-2">
