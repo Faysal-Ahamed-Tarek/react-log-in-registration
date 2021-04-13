@@ -23,7 +23,7 @@ const Product_listing = (props) => {
                 <p className="text-center">Total</p>
             </div>
             <div className="col-1">
-                <span className="remove_btn"><i class="fa fa-times" aria-hidden="true"></i></span>
+                <span className="remove_btn" onClick={() => props.RemoveProduct(CartProduct)}><i class="fa fa-times" aria-hidden="true"></i></span>
             </div>
         </div>
         

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import './cart.css';
 import Product_listing from './ProductList';
@@ -9,9 +9,17 @@ const Cart =() => {
         const DefaultProduct = localStorage.getItem("set_cart_product");
         return JSON.parse(DefaultProduct);
     });
-    console.log(Cart_Info);
+    //remove item from cart
+    const RemoveProduct = (removeItem) => {
+        console.log(removeItem);
+        const Cart_item = Cart_Info.filter( (res) => res.key !== removeItem.key );
+        setCart_Info(Cart_item);
+    }
+    useEffect( () => {
+        localStorage.setItem("set_cart_product",JSON.stringify(Cart_Info));
+    },[Cart_Info]);
     //quantity
-    const [Product_Quantity,setProduct_Quantity] = useState(0);
+    const [Product_Quantity,setProduct_Quantity] = useState(1);
     //increment quantity
     const Increment = () =>{
         
@@ -46,7 +54,7 @@ const Cart =() => {
                             </div>
                         </div>
                         {
-                          Cart_Info &&  Cart_Info.map( res => <Product_listing CartProduct={res} Decrement={Decrement} Increment={Increment} Product_Quantity={Product_Quantity}/> )
+                          Cart_Info &&  Cart_Info.map( res => <Product_listing CartProduct={res} Decrement={Decrement} Increment={Increment} Product_Quantity={Product_Quantity} RemoveProduct={RemoveProduct}/> )
                         }
                     </div>
                     <div className="col-3 pt-2">
