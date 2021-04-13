@@ -1,24 +1,12 @@
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import slugify from 'slugify';
-import { Cart_Manage } from '../../../App';
 
 const Product_view = (props) => {
-   const Single_Product = props.product_content;
-    const { category,name,price,img,key } = Single_Product;
-    
-    //set Products on cart
-   //  const [Cart_Products,setCart_Products] = useContext(Cart_Manage);
-   const [cart,setCart] = useState([]);
-   const Add_to_cart = (Get_CartProduct) => {
 
-      // console.log("single product",Get_CartProduct);
-      const NewCart = [...cart,Get_CartProduct];
-      setCart(NewCart);
-      // setCart([...cart,Get_CartProduct]);
-      // console.log(cart);
-    }
-    console.log(cart);
+   const {product_content,Add_to_cart} = props;
+   const { name,price,img,key } = product_content;
+
     return(
         <>
           <div className="Product_container p-3 bg-white">
@@ -32,7 +20,7 @@ const Product_view = (props) => {
              </div>
              <div className="row Price_Cart">
                 <span className="col-4">${price}</span>
-                <button className="col-7 add_to_cart" onClick={ () => Add_to_cart(Single_Product)}>add to cart</button>
+                <button className="col-7 add_to_cart" onClick={ () => Add_to_cart(product_content)}>add to cart</button>
              </div>
              <div className="Compare_Wishlist row">
                 <span className="col-6"> &nbsp; wishlist</span>

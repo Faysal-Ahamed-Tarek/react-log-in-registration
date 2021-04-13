@@ -2,15 +2,15 @@ import React from 'react';
 import './cart.css';
 
 const Product_listing = (props) => {
-    const {Decrement, Increment, Product_Quantity,CartProducts} = props;
-    const {name,price,img} = CartProducts;
+    const {Decrement, Increment, Product_Quantity,CartProduct} = props;
+    const {name,price,img} = CartProduct;
     return(
         <>
         <div className="row">
             <div className="col-2">
                 <img src={img} className="w-100" />
             </div>
-            <div className="col-4">
+            <div className="col-3">
                 <p>{name.substring(0,55)}</p>
             </div>
             <div className="col-2 quantity_box">
@@ -21,6 +21,9 @@ const Product_listing = (props) => {
             </div>
             <div className="col-2">
                 <p className="text-center">Total</p>
+            </div>
+            <div className="col-1">
+                <span className="remove_btn"><i class="fa fa-times" aria-hidden="true"></i></span>
             </div>
         </div>
         

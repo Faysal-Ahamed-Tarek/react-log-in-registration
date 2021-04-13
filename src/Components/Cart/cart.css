@@ -14,3 +14,19 @@ p{
     align-items: center;
     justify-content: center;
 }
+span.remove_btn {
+    background: white;
+    color:black;
+    padding: 3px 8px;
+    font-size: 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+span.remove_btn:hover {
+    background-color: #11193b;
+    color:#faa500;
+}
+.cart_box{
+    border: 1px solid rgba(0,0,0,.125);
+}

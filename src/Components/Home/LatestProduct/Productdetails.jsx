@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useParams } from 'react-router';
+import { toast } from 'react-toastify';
 import fakeData from '../../../fakeData';
 import './ProductDetails.css';
 
@@ -7,15 +8,36 @@ const Product_details = () => {
     //quantity
     const [Quantity,setQuantity] = useState(0);
 
+   //add to cart state
+   const [Cart_Products,setCart_Products] = useState(localStorage.getItem("set_cart_product" || []));
+
     const {key} = useParams();
     const Get_Product = fakeData.find(val => val.key === key);
     const {name,img,price,stock,features,category} = Get_Product;
+
+    //increment and decrement
     const Increment = () => {
         setQuantity(Quantity + 1);
     }
     const Decrement = () => {
         setQuantity(Quantity - 1);
     }
+    //add to cart product
+    const Add_to_cart = (NewProduct) => {
+        const Find_Same_Product = Cart_Products.find((Product) => Product.key === NewProduct.key);
+        if(Find_Same_Product){
+            console.log("already added this product");
+        }else{
+            setCart_Products([...Cart_Products,NewProduct]);
+            const notify = () => {
+                toast.success("Product Has Been Added");
+            }
+            notify();
+            localStorage.setItem("set_cart_product", JSON.stringify(Cart_Products));
+        }
+     }
+
+
     return(
         <>
         <div className="container-fluid pt-5">
@@ -38,7 +60,7 @@ const Product_details = () => {
                             <button className="w-100"><span onClick={Increment}><i class="fa fa-plus" aria-hidden="true"></i></span>{Quantity}<span onClick={Decrement}><i class="fa fa-minus" aria-hidden="true"></i></span></button>
                         </div>
                         <div className="col-lg-3 add_to_cart mt-3 col-md-4">
-                            <button>Add To Cart</button>
+                            <button onClick={ () => Add_to_cart(Get_Product)}>Add To Cart</button>
                         </div>
                         <div className="col-lg-3 Buy_now  mt-3 col-md-4">
                             <button>Buy Now</button>
