@@ -1,6 +1,7 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
+import { Cart_Manager } from '../../../App';
 import fakeData from '../../../fakeData';
 import './ProductDetails.css';
 
@@ -9,7 +10,7 @@ const Product_details = () => {
     const [Quantity,setQuantity] = useState(0);
 
    //add to cart state
-   const [Cart_Products,setCart_Products] = useState(localStorage.getItem("set_cart_product" || []));
+    const [Cart_info,setCart_info] = useContext(Cart_Manager);
 
     const {key} = useParams();
     const Get_Product = fakeData.find(val => val.key === key);
@@ -23,23 +24,29 @@ const Product_details = () => {
         setQuantity(Quantity - 1);
     }
     //add to cart product
-    const Add_to_cart = (NewProduct) => {
-        const Find_Same_Product = Cart_Products.find((Product) => Product.key === NewProduct.key);
+    const Add_To_Cart = (NewProduct) => {
+        const Find_Same_Product = Cart_info.find((Product) => Product.key === NewProduct.key);
         if(Find_Same_Product){
-            console.log("already added this product");
+            const notify = () => {
+                toast.warning(" This Product already Added On Your Cart");
+            }
+            notify();
         }else{
-            setCart_Products([...Cart_Products,NewProduct]);
+            NewProduct.Quantity = 1 ;
+            setCart_info([...Cart_info,NewProduct]);
             const notify = () => {
                 toast.success("Product Has Been Added");
             }
             notify();
-            localStorage.setItem("set_cart_product", JSON.stringify(Cart_Products));
         }
      }
-
+    useEffect(() => {
+        localStorage.setItem("set_cart_product", JSON.stringify(Cart_info)) 
+     },[Cart_info]);
 
     return(
         <>
+        <ToastContainer autoClose={2000} />
         <div className="container-fluid pt-5">
         <div className="pr-lg-5 pr-md-3 pl-lg-5 pl-md-3 pr-2 pl-2">
             <div className="Product_details p-2 p-lg-4 bg-white row">
@@ -60,7 +67,7 @@ const Product_details = () => {
                             <button className="w-100"><span onClick={Increment}><i class="fa fa-plus" aria-hidden="true"></i></span>{Quantity}<span onClick={Decrement}><i class="fa fa-minus" aria-hidden="true"></i></span></button>
                         </div>
                         <div className="col-lg-3 add_to_cart mt-3 col-md-4">
-                            <button onClick={ () => Add_to_cart(Get_Product)}>Add To Cart</button>
+                            <button onClick={ () => Add_To_Cart(Get_Product)}>Add To Cart</button>
                         </div>
                         <div className="col-lg-3 Buy_now  mt-3 col-md-4">
                             <button>Buy Now</button>

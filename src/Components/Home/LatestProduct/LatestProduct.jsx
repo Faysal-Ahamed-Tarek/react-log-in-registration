@@ -3,44 +3,40 @@ import fakeData from '../../../fakeData';
 import Product_view from './SingleProduct';
 import './ProductDetails.css';
 import { toast , ToastContainer} from 'react-toastify';
+import { Cart_Manager } from '../../../App';
 
 const First_section = () => {
 
     //add to cart state
-    const [Cart_Products,setCart_Products] = useState([]);
+    const [Cart_info,setCart_info] = useContext(Cart_Manager);
 
     //all products
     const [Products] = useState(fakeData.slice(0,8));
 
     //add product on cart
     const Add_to_cart = (NewProduct) => {
-        const Find_Same_Product = Cart_Products.find((Product) => Product.key === NewProduct.key);
+        const Find_Same_Product = Cart_info.find((Product) => Product.key === NewProduct.key);
         if(Find_Same_Product){
             const notify = () => {
                 toast.warning(" This Product already Added On Your Cart");
             }
             notify();
         }else{
-            setCart_Products([...Cart_Products,NewProduct]);
+            NewProduct.Quantity = 1 ;
+            setCart_info([...Cart_info,NewProduct]);
             const notify = () => {
                 toast.success("Product Has Been Added");
             }
             notify();
         }
      }
-     //add cart product on local storage
      useEffect(() => {
-         const DefaultCart = localStorage.getItem("set_cart_product") || [];
-         setCart_Products(JSON.parse(DefaultCart));
-     },[]);
-
-     useEffect(() => {
-        localStorage.setItem("set_cart_product", JSON.stringify(Cart_Products))
-     },[Cart_Products]);
+        localStorage.setItem("set_cart_product", JSON.stringify(Cart_info)) 
+     },[Cart_info]);
      
     return (
         <>
-        <ToastContainer autoClose={3000} hideProgressBar={false} />
+        <ToastContainer autoClose={2000} />
         <section className="Latest_products pt-4 pb-4">
             <div className="container-fluid">
                 <div className="pr-lg-5 pr-md-3 pl-lg-5 pl-md-3">

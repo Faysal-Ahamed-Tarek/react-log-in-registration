@@ -12,7 +12,13 @@ export const Cart_Manager = createContext();
 function App() {
 
   const [User_Info,set_User_Info] = useState({});
-  const [Cart_info,setCart_info] = useState([]);
+  //add to cart state
+  const [Cart_info,setCart_info] = useState(() => {
+    const DefaultItem = window.localStorage.getItem("set_cart_product");
+    return DefaultItem !== null
+      ? JSON.parse(DefaultItem)
+      : [];
+  });
 
   return (
     <User_Information.Provider value={[User_Info,set_User_Info]}>

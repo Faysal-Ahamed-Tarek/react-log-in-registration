@@ -1,38 +1,27 @@
-import { React , useEffect, useState } from 'react';
+import { React , useContext, useEffect, useState } from 'react';
+import { Cart_Manager } from '../../App';
 import './cart.css';
 import Product_listing from './ProductList';
 
 const Cart =() => {
 
-    //add to cart state
-    const [Cart_Info,setCart_Info] = useState(() => {
-        const DefaultProduct = localStorage.getItem("set_cart_product");
-        return JSON.parse(DefaultProduct);
-    });
+    //Remove From Cart
+    const [Cart_info,setCart_info] = useContext(Cart_Manager);
+
+    //Cart Calculation
+    // const ProductTotalPrice = Cart_info.reduce( (initialValue,Total) => initialValue + Total.price , 0 );
 
     //remove item from cart
     const RemoveProduct = (removeItem) => {
-        console.log(removeItem);
-        const Cart_item = Cart_Info.filter( (res) => res.key !== removeItem.key );
-        setCart_Info(Cart_item);
+        const Cart_item = Cart_info.filter( (res) => res.key !== removeItem.key );
+        setCart_info(Cart_item);
     }
+    //add product after removing
     useEffect( () => {
-        localStorage.setItem("set_cart_product",JSON.stringify(Cart_Info));
-    },[Cart_Info]);
+        localStorage.setItem("set_cart_product", JSON.stringify(Cart_info));
+    },[Cart_info]);
 
-    //quantity
-    const [Product_Quantity,setProduct_Quantity] = useState(1);
 
-    //increment quantity
-    const Increment = () =>{
-        setProduct_Quantity(Product_Quantity + 1);
-    }
-    //increment quantity
-    const Decrement = () =>{
-        if(Product_Quantity > 1 ){
-            setProduct_Quantity(Product_Quantity - 1);
-        }
-    }
     return(
         <div className="container-fluid pt-5 pb-3">
             <div className="pr-lg-5 pr-md-3 pl-lg-5 pl-md-3">
@@ -59,12 +48,28 @@ const Cart =() => {
                             </div>
                         </div>
                         {
-                          Cart_Info &&  Cart_Info.map( res => <Product_listing CartProduct={res} Decrement={Decrement} Increment={Increment} Product_Quantity={Product_Quantity} RemoveProduct={RemoveProduct}/> )
+                          Cart_info &&  Cart_info.map( res => <Product_listing CartProduct={res} RemoveProduct={RemoveProduct}/> )
                         }
                     </div>
                     <div className="col-3 pt-2">
-                        <div className="Cart_calculate pt-2 pb-3">
+                        <div className="Cart_calculate p-3">
                             <h5 className="text-center">Order Summery</h5 >
+                            <div className="row pt-2">
+                                <p className="col-8 text-left">Total :</p>
+                                <p className="col-4 text-right">$000</p>
+                            </div>
+                            <div className="row pt-2">
+                                <p className="col-8 text-left">Shipping Cost :</p>
+                                <p className="col-4 text-right">$000</p>
+                            </div>
+                            <div className="row pt-2 pb-3">
+                                <p className="col-8 text-left">Tax :</p>
+                                <p className="col-4 text-right">$000</p>
+                            </div>
+                            <div className="row pt-2 border-top">
+                                <h5 className="col-8 text-left">Subtotal :</h5>
+                                <p className="col-4 text-right">$000</p>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -1,9 +1,31 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
+import { Cart_Manager } from '../../App';
 import './cart.css';
 
 const Product_listing = (props) => {
-    const {Decrement, Increment, Product_Quantity,CartProduct} = props;
-    const {name,price,img} = CartProduct;
+    const {CartProduct} = props;
+    const {name,price,img,Quantity} = CartProduct;
+
+        //Product Total Price update
+        const [Cart_info,setCart_info] = useContext(Cart_Manager);
+        //quantity
+        let Product_Quantity = Quantity;
+
+        //single PRoduct total price
+        const TotalPrice = (price * Product_Quantity).toFixed(2);
+
+        //increment quantity
+        const Increment = () =>{
+            Product_Quantity = Product_Quantity + 1 ;
+            Cart_info.map( (Product) =>Product.Quantity = Product_Quantity);
+        }
+
+        //increment quantity
+        const Decrement = () =>{
+            if(Product_Quantity > 1 ){
+                Product_Quantity = Product_Quantity - 1 ;
+            }
+        }
     return(
         <>
         <div className="row">
@@ -20,7 +42,7 @@ const Product_listing = (props) => {
                 <p className="text-center">$ {price}</p>
             </div>
             <div className="col-2">
-                <p className="text-center">Total</p>
+                <p className="text-center">${TotalPrice}</p>
             </div>
             <div className="col-1">
                 <span className="remove_btn" onClick={() => props.RemoveProduct(CartProduct)}><i class="fa fa-times" aria-hidden="true"></i></span>
