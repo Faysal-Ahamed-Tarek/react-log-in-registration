@@ -22,7 +22,6 @@ const First_section = () => {
             }
             notify();
         }else{
-            NewProduct.Quantity = 1 ;
             setCart_info([...Cart_info,NewProduct]);
             const notify = () => {
                 toast.success("Product Has Been Added");
@@ -41,7 +40,7 @@ const First_section = () => {
             <div className="container-fluid">
                 <div className="pr-lg-5 pr-md-3 pl-lg-5 pl-md-3">
                 <h3 className="text-center">Latest Products</h3>
-                    <div className="row shop_body pt-3">
+                    <div className="row shop_body pt-3 pb-3">
                         {
                             Products.map( (Product,index) => <div className="col-lg-3 col-md-6 mb-3"><Product_view IdKey={index} product_content={Product} Add_to_cart={Add_to_cart} /></div> )
                         }

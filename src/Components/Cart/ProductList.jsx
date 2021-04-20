@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Cart_Manager } from '../../App';
 import './cart.css';
 
@@ -8,22 +8,29 @@ const Product_listing = (props) => {
 
         //Product Total Price update
         const [Cart_info,setCart_info] = useContext(Cart_Manager);
+        
+        // //update context state
+        // useEffect( () => {
+        //     localStorage.setItem("set_cart_product", JSON.stringify(Cart_info));
+        // },[Cart_info]);
+
         //quantity
-        let Product_Quantity = Quantity;
+        const [Product_Quantity,setProductQuantity] = useState(1);
 
         //single PRoduct total price
         const TotalPrice = (price * Product_Quantity).toFixed(2);
 
         //increment quantity
         const Increment = () =>{
-            Product_Quantity = Product_Quantity + 1 ;
-            Cart_info.map( (Product) =>Product.Quantity = Product_Quantity);
+            setProductQuantity(Product_Quantity + 1 );
+            CartProduct.Quantity = Quantity + 1;
+            console.log(CartProduct);
         }
 
         //increment quantity
         const Decrement = () =>{
             if(Product_Quantity > 1 ){
-                Product_Quantity = Product_Quantity - 1 ;
+                setProductQuantity(Product_Quantity - 1 );
             }
         }
     return(

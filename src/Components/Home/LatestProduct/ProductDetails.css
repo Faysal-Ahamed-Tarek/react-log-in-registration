@@ -52,3 +52,24 @@
     border-radius: 4px;
     color: white;
 }
+button.add_to_cart {
+    background-color: #f7f7f7;
+    border: none;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    background: #11193b;
+    color: #faa500;
+    border-radius: 2px;
+    padding: 6px 0px;
+    transition: 0.5s;
+    display: none;
+}
+
+.Product_container:hover button.add_to_cart {
+    transition:0.5s;
+    display: block;
+}
+.Product_container{
+       transition:1s;
+}

@@ -18,9 +18,9 @@ const Product_view = (props) => {
              <div className="product_img">
              <Link to={`/${slugify(name)}/${key}`}><img src={img} /></Link>
              </div>
-             <div className="row Price_Cart">
-                <p className="col-4">${price}</p>
-                <button className="col-7 add_to_cart" onClick={ () => Add_to_cart(product_content)}>add to cart</button>
+             <div className="Price_Cart">
+                <p className="p-2 text-center">${price}</p>
+                <button className="add_to_cart w-100" onClick={ () => Add_to_cart(product_content)}>add to cart</button>
              </div>
           </div>
         </>

@@ -8,8 +8,20 @@ const Cart =() => {
     //Remove From Cart
     const [Cart_info,setCart_info] = useContext(Cart_Manager);
 
+    //check
+    useEffect( () => {
+        Cart_info.map( (Item) => Item.Quantity = 1 );
+        localStorage.setItem("set_cart_product", JSON.stringify(Cart_info));
+    },[Cart_info]);
+
+    //Cart total price Calculation
+    const ProductTotalPrice = Cart_info.reduce( (initialValue,Total) => initialValue + Total.price , 0 ).toFixed(2);
+
     //Cart Calculation
-    // const ProductTotalPrice = Cart_info.reduce( (initialValue,Total) => initialValue + Total.price , 0 );
+    const ShippingPrice = Cart_info.reduce( (initialValue,Total) => initialValue + Total.shipping , 0 ).toFixed(2);
+
+    //subtotal price calculation
+    const SubTotal = Number(ProductTotalPrice) + Number(ShippingPrice);
 
     //remove item from cart
     const RemoveProduct = (removeItem) => {
@@ -20,7 +32,6 @@ const Cart =() => {
     useEffect( () => {
         localStorage.setItem("set_cart_product", JSON.stringify(Cart_info));
     },[Cart_info]);
-
 
     return(
         <div className="container-fluid pt-5 pb-3">
@@ -55,20 +66,16 @@ const Cart =() => {
                         <div className="Cart_calculate p-3">
                             <h5 className="text-center">Order Summery</h5 >
                             <div className="row pt-2">
-                                <p className="col-8 text-left">Total :</p>
-                                <p className="col-4 text-right">$000</p>
+                                <p className="col text-left">Total :</p>
+                                <p className="col text-right">${ProductTotalPrice}</p>
                             </div>
-                            <div className="row pt-2">
+                            <div className="row pt-2 pb-2">
                                 <p className="col-8 text-left">Shipping Cost :</p>
-                                <p className="col-4 text-right">$000</p>
-                            </div>
-                            <div className="row pt-2 pb-3">
-                                <p className="col-8 text-left">Tax :</p>
-                                <p className="col-4 text-right">$000</p>
+                                <p className="col-4 text-right">${ShippingPrice}</p>
                             </div>
                             <div className="row pt-2 border-top">
-                                <h5 className="col-8 text-left">Subtotal :</h5>
-                                <p className="col-4 text-right">$000</p>
+                                <h5 className="col text-left">Subtotal :</h5>
+                                <p className="col text-right">${Number(SubTotal.toFixed(2))}</p>
                             </div>
                         </div>
                     </div>
